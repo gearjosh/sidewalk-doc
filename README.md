@@ -31,6 +31,7 @@
   - webpack-cli 2.0.9: allows webpack commands through the command line
   - webpack-dev-server 3.1.0: creates a server for development
   - jquery 3.3.1: enables jquery commands
+  - dotenv webpack 1.5.7: manages api keys
 
 ### Specs
 
