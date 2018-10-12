@@ -1,15 +1,7 @@
-* {
-  margin: 0;
-  font-family: sans-serif;
-}
-
 html {
-  background-color: black;
-  color: lime;
-  font-size: 100%;
+  background-color: lightblue;
 }
 
 .container {
-  margin: auto;
   padding: 1rem;
 }
