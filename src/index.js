@@ -16,6 +16,7 @@ $(document).ready(() => {
     $('#').val("");
 
     const results = doctorAPICall(stateInput, cityInput, nameInput, specialtyInput);
+    console.log(results);
 
     // results comes back as: [names = [[first, last, title], [first, last, title], ...], specialties = [[actor, description], [actor, description], ...];
 
