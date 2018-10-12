@@ -2,9 +2,10 @@ import './styles.css';
 import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { doctorAPICall } from './doctor-api-call.js';
 
 $(document).ready(() => {
-  $('#').submit(function() {
+  $('#form').submit(function() {
     event.preventDefault();
     let nameInput = $('#doctor-name').val();
     $('#doctor-name').val("");
@@ -20,19 +21,19 @@ $(document).ready(() => {
 
     // results comes back as: [names = [[first, last, title], [first, last, title], ...], specialties = [[actor, description], [actor, description], ...];
 
-    if (typeof results === 'array') { //success
+    if (Array.isArray(results)) { //success
       const names = results[0];
       const specialties = results[1];
       const returnResults = (namesArray, specialtiesArray) => {
         let listItemName = () => {
-          for (i = 0; i < namesArray.length; i ++) {
+          for (let i = 0; i < namesArray.length; i ++) {
             let nameArray = namesArray[i];
             let nameAndTitle = `${ nameArray[0] } ${ nameArray[2] }, ${ nameArray[3] }`;
             return nameAndTitle;
           }
         };
         let listItemSpecialty = () => {
-          for (i = 0; i < specialtiesArray.length; i ++) {
+          for (let i = 0; i < specialtiesArray.length; i ++) {
             let specialtyArray = specialtiesArray[i];
             let specialtySubList = `<li>${ specialtyArray[0] }</li><li>${ specialtyArray[1] }</li>`;
             return specialtySubList;
@@ -48,7 +49,7 @@ $(document).ready(() => {
       $('#results').append(`<li>${ outputToUserArray[0] }</li>
         <ul>${ outputToUserArray[1] }</ul>`);
     } else { //error
-      $('#').text(`There was an error processing your request: ${results}
+      $('#results').text(`There was an error processing your request: ${results}
         Please try again.`);
     }
   });
