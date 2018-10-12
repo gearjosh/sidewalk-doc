@@ -35,11 +35,16 @@
 
 ### Specs
 
-  ```
-
-  ```
-
 ## Setup/Installation Requirements
+
+### Step One: API key
+
+- Visit the BetterDoctor API site and click “Get a free API key”.
+- Fill out the form, listing Epicodus as the Organization/Company Name.
+- Check your email to verify your key.
+- After verifying, your API key should be listed on the front page (ex: “a2c356ibgh44…..”) or under My Account > Applications.
+
+### Step Two: Install
 
 You must have Node.js installed on your machine. If not, follow these pre-instructions:
 
@@ -66,10 +71,14 @@ Now install Node.js like this in terminal: `$ brew install node`.
 - Then enter `$ git clone https://github.com/gearjosh/sidewalk-doc.git`.
 - Enter `$ cd sidewalk-doc`.
 - Enter `$ npm install`
+- Create a file in the root directory titled `.env`
+  - Paste the following into the empty file: `exports.apiKey=`
+  - Enter your API key (see above) after the =.  **Do not add any spaces.**
+  - Save the file.
 - Finally, enter `$ npm run start`.
 
 ## Known Bugs
-- There is no user interface, and commands cannot be given in the console. All this can do at the moment is pass tests.
+- This program currently does not function.  I can't get it to successfully return or read the json reponse from the API.
 
 ## Support and contact details
 - For questions or support you can email me at: comedian.sean.connery@gmail.com.
