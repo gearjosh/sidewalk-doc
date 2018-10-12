@@ -1,0 +1,25 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "extends": "eslint:recommended",
+  "env": {
+    "es6": true,
+    "browser": true,
+    "jquery": true,
+    "node": true
+  },
+  "rules": {
+    "semi": "warn",
+    "indent": ["warn", 2],
+    "no-console": "warn",
+    "no-debugger": "warn",
+    "no-unused-vars": [
+      "warn", {
+        "varsIgnorePattern": "[iI]gnore"
+      }
+    ],
+    "no-undef": "warn"
+  }
+}

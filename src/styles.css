@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+html {
+  background-color: black;
+  color: lime;
+  font-size: 100%;
+}
+
+.container {
+  margin: auto;
+  padding: 1rem;
+}
