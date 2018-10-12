@@ -26,18 +26,16 @@ $(document).ready(() => {
       const returnResults = (namesArray, specialtiesArray) => {
         let listItemName = () => {
           for (i = 0; i < namesArray.length; i ++) {
-            for (var i = 0; i < nameArray.length; i++) {
-              let nameAndTitle = `${ nameArray[0] } ${ nameArray[2] }, ${ nameArray[3] }`;
-              return nameAndTitle;
-            }
+            let nameArray = namesArray[i];
+            let nameAndTitle = `${ nameArray[0] } ${ nameArray[2] }, ${ nameArray[3] }`;
+            return nameAndTitle;
           }
         };
         let listItemSpecialty = () => {
           for (i = 0; i < specialtiesArray.length; i ++) {
-            for (var i = 0; i < specialtyArray.length; i++) {
-              let specialtySubList = `<li>${ specialtyArray[0] }</li><li>${ specialtyArray[1] }</li>`;
-              return specialtySubList;
-            }
+            let specialtyArray = specialtiesArray[i];
+            let specialtySubList = `<li>${ specialtyArray[0] }</li><li>${ specialtyArray[1] }</li>`;
+            return specialtySubList;
           }
         };
         const finalArray = [listItemName(), listItemSpecialty()];
