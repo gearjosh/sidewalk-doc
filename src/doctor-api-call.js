@@ -4,8 +4,13 @@ export function doctorAPICall(state, city, name = '', issue = '') {
 
   let doctorPromise = new Promise(function(resolve, reject) {
     let request = new XMLHttpRequest();
-    let url = `https://api.betterdoctor.com/2016-03-01/doctors?user_key=${ process.env.exports.apiKey }&name=${ name }&query=${ issue }&location=${ state }-${ city }`;
-    request.onload = () => {
+
+    // let url = `https://api.betterdoctor.com/2016-03-01/doctors?name=${name}&query=${issue}&location=${state}-${city}&user_key=${process.env.exports.apiKey}`;
+
+    let url = `https://api.betterdoctor.com/2016-03-01/doctors?query=${issue}&name=${name}&location=${state}-${city}&sort=rating-desc&skip=0&limit=10&user_key=${process.env.exports.apiKey}`;
+
+    console.log(url);
+    request.onload = function() {
       if (this.status === 200) {
         resolve(request.response);
       } else {
@@ -17,21 +22,23 @@ export function doctorAPICall(state, city, name = '', issue = '') {
   });
 
   doctorPromise.then((response) => {
-    // const body = JSON.parse(response);
+    const body = JSON.parse(response);
     const names = [];
-    const issues = [];
+    const specialties = [];
     const dataLocation = body.data;
-    const profileLocation = body.data.profile;
-    const issuesLocation = body.data.profile.issues;
 
     for (let i = 0; i < dataLocation.length; i++) {
+      const profileLocation = dataLocation[i].profile;
+      const specialtiesLocation = dataLocation[i].specialties ;
       names.push(profileLocation.first_name, profileLocation.last_name, profileLocation.title);
-      for (let j = 0; j < issuesLocation.length; j ++) {
-        issues.push(issuesLocation.actor, issuesLocation.description)
+      for (let j = 0; j < specialtiesLocation.length; j ++) {
+        specialties.push(specialtiesLocation[j].actor, specialtiesLocation[j].description);
       }
     }
+    console.log(`names is ${names}`);
+    console.log(`specialties is ${specialties}`);
 
-    const parsedResults = [names, issues];
+    const parsedResults = [names, specialties];
     console.log(`doctorAPI result = ${parsedResults}`);
     return parsedResults;
 
