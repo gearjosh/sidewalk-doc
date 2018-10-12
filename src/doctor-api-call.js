@@ -22,28 +22,13 @@ export function doctorAPICall(state, city, name = '', issue = '') {
   });
 
   doctorPromise.then((response) => {
+    console.log(`doctorAPI got a response`);
     const body = JSON.parse(response);
-    const names = [];
-    const specialties = [];
-    const dataLocation = body.data;
+    console.log(`body is ${body}`);
 
-    for (let i = 0; i < dataLocation.length; i++) {
-      const profileLocation = dataLocation[i].profile;
-      const specialtiesLocation = dataLocation[i].specialties ;
-      names.push(profileLocation.first_name, profileLocation.last_name, profileLocation.title);
-      for (let j = 0; j < specialtiesLocation.length; j ++) {
-        specialties.push(specialtiesLocation[j].actor, specialtiesLocation[j].description);
-      }
-    }
-    console.log(`names is ${names}`);
-    console.log(`specialties is ${specialties}`);
-
-    const parsedResults = [names, specialties];
-    console.log(`doctorAPI result = ${parsedResults}`);
-    return parsedResults;
 
   }, (error) => {
-    console.log("there is not a response");
+    console.log(`there is not a response: ${error.message}`);
     return error.message;
   });
 }

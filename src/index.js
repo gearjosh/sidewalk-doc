@@ -3,6 +3,7 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { doctorAPICall } from './doctor-api-call.js';
+import { parseResult } from './parse-result.js'
 
 $(document).ready(() => {
   $('#form').submit(function() {
@@ -18,12 +19,13 @@ $(document).ready(() => {
 
     const results = doctorAPICall(stateInput, cityInput, nameInput, issueInput);
     console.log(`results is ${results}`);
+    const parsedResults = parseResult(results);
 
     // results comes back as: [names = [[first, last, title], [first, last, title], ...], specialties = [[actor, description], [actor, description], ...];
 
-    if (Array.isArray(results)) { //success
-      const names = results[0];
-      const specialties = results[1];
+    if (Array.isArray(parsedResults)) { //success
+      const names = parsedResults[0];
+      const specialties = parsedResults[1];
       const returnResults = (namesArray, specialtiesArray) => {
         let listItemName = () => {
           for (let i = 0; i < namesArray.length; i ++) {
