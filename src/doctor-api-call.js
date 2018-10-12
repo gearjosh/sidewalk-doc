@@ -3,21 +3,21 @@ export function doctorAPICall(state, city, name = '', issue = '') {
   console.log("doctorAPICall started");
 
   let doctorPromise = new Promise(function(resolve, reject) {
-    let doctorRequest = new XMLHttpRequest();
+    let request = new XMLHttpRequest();
     let url = `https://api.betterdoctor.com/2016-03-01/doctors?user_key=${ process.env.exports.apiKey }&name=${ name }&query=${ issue }&location=${ state }-${ city }`;
-    doctorRequest.onload = () => {
+    request.onload = () => {
       if (this.status === 200) {
-        resolve(doctorRequest.response);
+        resolve(request.response);
       } else {
-        reject(Error(doctorRequest.statusText));
+        reject(Error(request.statusText));
       }
     }
-    doctorRequest.open("GET", url, true);
-    doctorRequest.send();
+    request.open("GET", url, true);
+    request.send();
   });
 
   doctorPromise.then((response) => {
-    const body = JSON.parse(response);
+    // const body = JSON.parse(response);
     const names = [];
     const issues = [];
     const dataLocation = body.data;
@@ -36,6 +36,7 @@ export function doctorAPICall(state, city, name = '', issue = '') {
     return parsedResults;
 
   }, (error) => {
+    console.log("there is not a response");
     return error.message;
   });
 }
