@@ -2,8 +2,8 @@ import './styles.css';
 import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { doctorAPICall } from './doctor-api-call.js';
-import { parseResult } from './parse-result.js'
+import { doctorAPICall } from './doctorApiCall.js';
+import { parseResult } from './parseResult.js'
 
 $(document).ready(() => {
   $('#form').submit(function() {
@@ -17,42 +17,37 @@ $(document).ready(() => {
     let cityInput = $('#city').val();
     $('#city').val("");
 
-    const results = doctorAPICall(stateInput, cityInput, nameInput, issueInput);
-    console.log(`results is ${results}`);
-    const parsedResults = parseResult(results);
+
+    let doctorPromise = doctorAPICall(stateInput, cityInput, nameInput, issueInput);
+    // console.log(`results is ${results}`);
+    // const parsedResults = parseResult(results);
+
+
+    doctorPromise.then((response) => {
+      console.log(`doctorAPI got a response`);
+      console.log(`response is ${response}`);
+      const responseV2 = JSON.parse(response);
+      console.log(`responseV2 is ${responseV2}`);
+      const resultsArray = parseResult(responseV2);
+      console.log(`resultsArray is ${resultsArray}`);
+
+      resultsArray.forEach((result) => {
+        $('#results').append(`<li>${ result[0] }</li>`);
+        result[1].forEach((specialty) => {
+          $('#results').append(`<ul>${ specialty }</ul>`);
+        });
+      });
+    }, (error) => {
+      $('#results').text(`There was an error processing your request: ${results}
+      Please try again.`);
+    });
+
 
     // results comes back as: [names = [[first, last, title], [first, last, title], ...], specialties = [[actor, description], [actor, description], ...];
 
-    if (Array.isArray(parsedResults)) { //success
-      const names = parsedResults[0];
-      const specialties = parsedResults[1];
-      const returnResults = (namesArray, specialtiesArray) => {
-        let listItemName = () => {
-          for (let i = 0; i < namesArray.length; i ++) {
-            let nameArray = namesArray[i];
-            let nameAndTitle = `${ nameArray[0] } ${ nameArray[2] }, ${ nameArray[3] }`;
-            return nameAndTitle;
-          }
-        };
-        let listItemSpecialty = () => {
-          for (let i = 0; i < specialtiesArray.length; i ++) {
-            let specialtyArray = specialtiesArray[i];
-            let specialtySubList = `<li>${ specialtyArray[0] }</li><li>${ specialtyArray[1] }</li>`;
-            return specialtySubList;
-          }
-        };
-        const finalArray = [listItemName(), listItemSpecialty()];
-        return finalArray;
-      };
-
-      const outputToUserArray = returnResults(names, specialties);
-
-
-      $('#results').append(`<li>${ outputToUserArray[0] }</li>
-        <ul>${ outputToUserArray[1] }</ul>`);
-    } else { //error
-      $('#results').text(`There was an error processing your request: ${results}
-        Please try again.`);
-    }
   });
 });
+
+// } else { //error
+//
+// }

@@ -1,4 +1,10 @@
-export function doctorAPICall(state, city, name = '', issue = '') {
+export function doctorAPICall(state = '', city = '', name = '', issue = '') {
+
+  if (state === '') {
+    state = 'or';
+  } if (city === '') {
+    city = 'portland';
+  }
 
   console.log("doctorAPICall started");
 
@@ -21,14 +27,6 @@ export function doctorAPICall(state, city, name = '', issue = '') {
     request.send();
   });
 
-  doctorPromise.then((response) => {
-    console.log(`doctorAPI got a response`);
-    const body = JSON.parse(response);
-    console.log(`body is ${body}`);
+  return doctorPromise;
 
-
-  }, (error) => {
-    console.log(`there is not a response: ${error.message}`);
-    return error.message;
-  });
 }
