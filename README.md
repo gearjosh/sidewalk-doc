@@ -78,7 +78,7 @@ Now install Node.js like this in terminal: `$ brew install node`.
 - Finally, enter `$ npm run start`.
 
 ## Known Bugs
-- This program currently does not function.  I can't get it to successfully return or read the json reponse that it gets from the API.
+- No known bugs.
 
 ## Support and contact details
 - For questions or support you can email me at: comedian.sean.connery@gmail.com.
