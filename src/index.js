@@ -9,12 +9,13 @@ $(document).ready(() => {
   $('#form').submit(function() {
     event.preventDefault();
     let nameInput = $('#doctor-name').val();
-    $('#doctor-name').val("");
     let issueInput = $('#medical-issue').val();
-    $('#medical-issue').val("");
     let stateInput = $('#state').val();
-    $('#state').val("");
     let cityInput = $('#city').val();
+    $('#results').empty();
+    $('#doctor-name').val("");
+    $('#medical-issue').val("");
+    $('#state').val("");
     $('#city').val("");
 
 
@@ -30,6 +31,7 @@ $(document).ready(() => {
       console.log(`responseV2 is ${responseV2}`);
       const resultsArray = parseResult(responseV2);
       console.log(`resultsArray is ${resultsArray}`);
+
 
       resultsArray.forEach((result) => {
         $('#results').append(`<li>${ result[0] }</li>`);
