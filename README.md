@@ -84,7 +84,7 @@ Now install Node.js like this in terminal: `$ brew install node`.
 - For questions or support you can email me at: comedian.sean.connery@gmail.com.
 
 ## Technologies Used
-- This uses Javascript, Node.js, and everything listed under _Configuration/dependencies (npm)"_ above.
+- This uses Javascript, Node.js, and everything listed under _Configuration/dependencies (npm)_ above.
 
 ### License
 This software is licensed under GNU GPLv3.
